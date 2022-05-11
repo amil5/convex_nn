@@ -1,3 +1,4 @@
+import json
 import numpy as np
 import torch 
 from torch.utils.data import Dataset
@@ -12,6 +13,15 @@ def print_params(P,general=True,ncvx=False,cvx=False):
     param_len = len(max(pl,key=lambda x: len(x[0]))[0]) + 1
     print("{1:<{0}}: Value\n{2:}".format(param_len,"Parameter","="*(param_len+7)))
     print("\n".join(["{1:<{0}}: {2:}".format(param_len,k,v) for k,v in pl]))
+
+def save_params(P,path):
+    with open(path,'w') as f:
+        f.write(json.dumps(P))
+
+def load_params(path):
+    with open(path,'r') as f:
+        data = f.read()
+    return json.loads(data)
 
 def check_if_already_exists(element_list, element):
     # check if element exists in element_list where element is a numpy array
