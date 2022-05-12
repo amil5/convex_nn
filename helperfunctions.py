@@ -41,7 +41,7 @@ def make_mask(model):
             step = step + 1
     return mask
 
-def prune_by_percentile(model,mask,percentile):
+def prune_by_percentile(model,mask,percent):
     """
     Prunes the top percentile largest weights
     """
@@ -52,7 +52,6 @@ def prune_by_percentile(model,mask,percentile):
         tensor = param.data.cpu().numpy()
         alive = tensor[np.nonzero(tensor)] # flattened array of nonzero values
         percentile_value = np.percentile(abs(alive), percent)
-
         # Convert Tensors to numpy and calculate
         weight_dev = param.device
         new_mask = np.where(abs(tensor) < percentile_value, 0, mask[step])
