@@ -3,6 +3,5 @@ cifar-10-batches-py/
 __pycache__/
 .ipynb_checkpoints/
 .DS_Store
-cvx_nn*
-ncvx_nn*
-
+models/*.pth
+models/
